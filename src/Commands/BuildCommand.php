@@ -18,6 +18,7 @@ use Spatie\CommonMarkHighlighter\FencedCodeRenderer;
 use League\CommonMark\Extension\Table\TableExtension;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\CommonMark\GithubFlavoredMarkdownConverter;
+use Spatie\LaravelMarkdown\MarkdownRenderer;
 
 class BuildCommand extends Command
 {
@@ -140,7 +141,7 @@ class BuildCommand extends Command
                 );
 
                 return $this->prepareForPdf(
-                    $converter->convertToHtml($markdown),
+                    app(MarkdownRenderer::class)->toHtml($markdown),
                     $i + 1
                 );
             })
